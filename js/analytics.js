@@ -1,4 +1,4 @@
-var currValue = 0;
+var currValue = -1;
 window.setInterval(function () {
   var ctx = document.getElementById('analytics').getContext("2d");
   var postureAnalytics = JSON.parse(localStorage.getItem("postureAnalytics"));
