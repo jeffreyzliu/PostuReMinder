@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+  <title>PostuReMinder</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <meta name="description" content="Improve Your Overall Health One Step at a Time">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js">
+
+	</script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+
+	</script>
+	<meta name="viewport" content="width=device-width">
+	<title>repl.it</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<audio id="sound" src="notification_sound.mp3" preload="auto"></audio>
+	<script src="notification.js">
+
+	</script>
+	<script src="checkPosture.js">
+
+	</script>
+	<script src="https://kit.fontawesome.com/031bd8a1de.js" crossorigin="anonymous">
+
+	</script>
+
+</head>
+<style>
+	body {
+		background-image: url("img/bg2.png");
+		background-repeat: no-repeat;
+		background-size: auto;
+		background-position: 0px 469px;
+	}
+</style>
+
+
+<body>
+
+	<!--
+    <h1>Posture Check</h1>
+
+    <div class="form-section">
+      <div class="option-row">
+			<h2>Water Reminder:</h2>
+			<h2 class="values" id="water_value"></h2>
+			<div id="water_slider"></div>
+		</div>
+
+		<div class="option-row">
+			<h2>Stretch Reminder:</h2>
+			<h2 class="values" id="stretch_value"></h2>
+			<div id="stretch_slider"></div>
+		</div>
+
+
+-->
+
+
+	<div class="dashboard activities active">
+		<div>
+			<div class="activities">
+				<div class="right">
+					<div class="wrapper">
+						<div class="title">postuReMinder</div>
+						<div class="activity-cards">
+							<div class="activity-card ab-trigger" style="background-image: url('img/water.png');">
+								<div class="activity-card--inner ab-trigger">
+									<div class="title">Water Reminder</div>
+									<div class="description">Reminder to drink water!</div>
+									<br/>
+										<br/>
+											<div id="waterMessageMain" style="bottom:20px"></div>
+								</div>
+							</div>
+							<div class="activity-card md-trigger" style="background-image: url('img/posture.png');">
+								<div class="activity-card--inner md-trigger">
+									<div class="title">Posture Check</div>
+									<div class="description">Reminder to sit up straight! <br/> Click to Recalibrate.</div>
+									<br/>
+										<br/>
+											<br/>
+												<div id="calibrationMessage" style="bottom:20px"></div>
+								</div>
+							</div>
+							<div class="activity-card xy-trigger" style="background-image: url('img/stretch3.png');">
+								<div class="activity-card--inner xy-trigger">
+									<div class="title">Stretch Reminder</div>
+									<div class="description">Reminder to stretch periodically!</div>
+									<br/>
+										<div id="stretchMessageMain" style="bottom:20px;color:#008000"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="dashboard-navigation">
+		<div class="navigation-item">
+			<div class="image ">
+				<a href="./analytics.html" target="_blank">
+					<img src="img/data.png">
+        </a>
+        <div style="margin-top:-15px;margin-left:5px">Analytics</div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ALAN TEST
+
+
+
+
+
+
+
+<div class="dashboard settings active"><div>
+  <div class="settings">
+    <div class="right">
+      <div class="wrapper">
+        <div class="container">
+          <div class="title">Trump</div>
+          <div class="body settings2">
+            <div class="hue-icon"><img src="/ad12e94a54cb8e695016527ba8c6e1e1.png"></div>
+            <div class="actions flex">
+              <div class="empty"><Back</div>
+              <div class="button button3">Calibrate</div>
+              <div class="empty"><Skip</div></div>
+              </div></div></div></div></div></div>
+               </div></div>
+
+
+
+
+
+-->
+
+            <div id="player" >
+		          <i class="fa fa-volume-down"></i>
+		            <div id="volume"></div>
+              <i class="fa fa-volume-up" ></i>
+	          </div>
+            <div class="dropdown">
+              <button onclick="notificationDropdown()" class="dropbtn" style="width:140px;margin-right:-10px">Notifications</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a onclick="alertFunction('stretch')" style="cursor: pointer">Stretch</a>
+                  <a onclick="alertFunction('posture')" style="cursor: pointer">Posture</a>
+                  <a onclick="alertFunction('hydrate')" style="cursor: pointer">Hydrate</a>
+                  <a onclick="alertFunction('message')" style="cursor: pointer">Exit</a>
+                </div>
+              </div>
+            <div>
+<!--
+  <buttonthing class="md-trigger" data-modal="modal-12" style="cursor: pointer">Calibrate Posture</buttonthing>
+-->
+<div class="md-modal md-effect-12">
+    <div class="md-content">
+        <h3>Recalibrate Your Posture</h3>
+        <button onclick="updateAverage()">Recalibrate Now</button>
+       
+        <h2 id="timer"></h2>
+        <br/>
+        <div class="vidFeed">
+            <div class="div1"><video id="videoInput" width=640 height=480></video></div>
+            <div class="div2"><canvas id="canvasOutput" /></div>
+            <script src="js/utils.js"></script>
+            <script src="js/opencv.js"></script>
+            <script src="js/face-api.js"></script>
+            <script src="index.js"></script>
+        </div>
+        <button class="md-close">Close</button>
+    </div>
+</div>
+
+<div class="md-overlay"></div>
+
+
+
+<div class="ab-water ab-effect-12">
+  <div class="ab-content">
+    <div class="settings">
+      <div class="right">
+        <div class="wrapper" style="margin-top:-200px">
+          <div class="water">
+            <div class="title flex">
+            <div class="left"><span class="text">How often would you like Water Reminders?
+              <br>       
+              <h3 id="waterMessage"></h3>
+            </span>
+	          </div>
+        </div> 
+        <br/><br/>
+        <button class="ab-close">Close</button>
+        </div>
+                      <div id="nonplayer" >
+		          <i class="fas fa-minus"></i>
+		            <div id="water"></div>
+              <i class="fas fa-plus" style="margin-left:180px"></i>
+        </div>
+         </div>  </div>
+            <br/>
+    </div>
+        <br/>
+  </div>
+</div>
+
+<div class="ab-overlay"></div>
+
+
+
+
+
+
+<div class="xy-stretch xy-effect-12">
+    <div class="xy-content">
+        <div class="settings">
+      <div class="right">
+        <div class="wrapper" style="margin-top:-200px">
+          <div class="water">
+            <div class="title flex">
+            <div class="left"><span class="text">How often would you like Stretch Reminders?
+              <br>       
+              <h3 id="stretchMessage"></h3>
+            </span>
+	          </div>
+      
+        </div> 
+        <br/><br/>
+        <button class="xy-close">Close</button>
+        </div>
+        
+                      <div id="nonplayer" >
+		          <i class="fas fa-minus"></i>
+		            <div id="stretch"></div>
+              <i class="fas fa-plus" style="margin-left:180px"></i>
+        </div>
+         </div>  </div>
+            <br/>
+</div>
+    </div>
+</div>
+<div class="xy-overlay"></div>
+
+
+  <script src="stretch.js">
+	</script>
+
+  <script src="water.js">
+	</script>
+
+  <script src="modal.js">
+	</script>
+
+</body>
+</html>
